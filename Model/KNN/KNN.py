@@ -15,38 +15,6 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from time import time
 
-# 读入莺尾花数据集
-
-
-
-
-if __name__ == '__main__':
-    data = pd.read_csv("D:/Python/File/iris.csv")
-    data.columns = ['sepal_length','sepal_width','petal_length','petal_width','class']
-    data.iloc[:,0:-1] = preprocessing.scale(data.iloc[:,0:-1])
-    data['class_c'] =  pd.factorize(data['class'])[0]
-    x,y = data.iloc[:,0:-2],data.iloc[:,-1]  
-    print(data.shape,'\n',iris.head())
-    train_data,test_data,train_target,test_target = train_test_split(x,y,test_size = 0.25)
-    #print(X_train,X_test,y_train,y_test)
-    knn = neighbors.KNeighborsClassifier() 
-    knn.fit(train_data,train_target) 
-    test_predict = knn.predict(test_data)
-
-#confusion_matrix
-confusion_matrix(test_target,test_predict) 
-
-#classification_report
-import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set()
-target_names = ['setosa', 'versicolor', 'virginica']
-print(classification_report(test_target,test_predict, target_names=target_names))
-vis_data = pd.crosstab(index = test_target,columns = test_predict)
-f,ax = plt.subplots(figsize=(9, 6))
-sns.heatmap(vis_data, annot=True, fmt="d", linewidths=.5, ax=ax)
-
-
 '''KNN分类器'''
 
 def Data_Input():
