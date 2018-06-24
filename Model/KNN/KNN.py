@@ -20,10 +20,10 @@ from time import time
 def Data_Input():
     data = pd.read_csv("D:/Python/File/iris.csv")
     data.columns = ['sepal_length','sepal_width','petal_length','petal_width','class']
+    print(data.shape,'\n',data.head())
     data.iloc[:,0:-1] = preprocessing.scale(data.iloc[:,0:-1])
     data['class_c'] =  pd.factorize(data['class'])[0]
     x,y = data.iloc[:,0:-2],data.iloc[:,-1]  
-    print(data.shape,'\n',iris.head())
     train_data,test_data,train_target,test_target = train_test_split(x,y,test_size = 0.25)
     return train_data,test_data,train_target,test_target
 
