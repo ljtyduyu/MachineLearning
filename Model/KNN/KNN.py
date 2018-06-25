@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# 导入扩展包：
 import numpy as np
 import time
 import csv
@@ -17,6 +18,7 @@ from time import time
 
 '''KNN分类器'''
 
+# 数据导入、标准化、训练集与测试集划分：
 def Data_Input():
     data = pd.read_csv("D:/Python/File/iris.csv")
     data.columns = ['sepal_length','sepal_width','petal_length','petal_width','class']
@@ -27,7 +29,7 @@ def Data_Input():
     train_data,test_data,train_target,test_target = train_test_split(x,y,test_size = 0.25)
     return train_data,test_data,train_target,test_target
 
-# KNN分类算法函数定义
+# 构建KNN分类器
 def kNN_Classify(test_data,train_data,train_target,k):
     #diff = train_data -  np.tile(test_data,(len(train_data),1)) 
     #test_data  =  test_data.values[0].reshape(1,4)
@@ -50,9 +52,10 @@ def kNN_Classify(test_data,train_data,train_target,k):
     Max_count = counter.most_common(1)[0][0] 
     return Max_count
 
+# 单样本测试（需运行第一个数据导入代码）
 kNN_Classify(test_data.values[0].reshape(1,4),train_data,train_target,k = 5)
 
-    
+# 构建全样本分类函数：    
 def datingClassTest(test_data,train_data,train_target,test_target,k = 5):
     m = test_data.shape[0]
     w = test_data.shape[1]
@@ -77,6 +80,7 @@ def datingClassTest(test_data,train_data,train_target,test_target,k = 5):
     print(classification_report(test_target,test_predict, target_names=target_names))
     return test_data,confusion_matrix
 
+# 运行分类器：
 if __name__ == "__main__":
     #计时开始：
     t0 = time.time()
