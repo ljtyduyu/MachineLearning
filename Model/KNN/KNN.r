@@ -57,7 +57,7 @@ test_data  <- data_source$test_data
 train_data   <- data_source$train_data
 train_target <- data_source$train_target
 
-
+# 单样本测试（需运行第一个数据导入代码）
 kNN_Classify(
     test_data = test_data ,
     test_target = test_target,
