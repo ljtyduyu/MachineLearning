@@ -2,12 +2,16 @@
 ## -*- coding: utf-8 -*-
 ## KNN Model
 
+# 加载扩展包：
 library("dplyr")
 library('caret')
+library('magrittr')
 
+# 清空无关内存
 rm(list = ls())
 gc()
 
+# 数据导入代码（数据导入、特征标准化、训练集与测试机划分）
 Data_Input <- function(file_path = "D:/R/File/iris.csv",p = .75){
     data = read.csv(file_path,stringsAsFactors = FALSE,check.names = FALSE)
     names(data) <- c('sepal_length','sepal_width','petal_length','petal_width','class')
@@ -29,7 +33,7 @@ Data_Input <- function(file_path = "D:/R/File/iris.csv",p = .75){
  }
 
 
-
+# 构建KNN分类器：
 kNN_Classify <-function(test_data,test_target,train_data,train_target,k){
     # step 1: 计算距离
     centr_matrix = unlist(rep(test_data,time = nrow(train_data)),use.names = FALSE)  %>%
@@ -51,6 +55,7 @@ kNN_Classify <-function(test_data,test_target,train_data,train_target,k){
     return (Max_count)
 }
 
+# 测试集、验证集收集：
 data_source  <- Data_Input()
 train_data   <- data_source$train_data
 test_data  <- data_source$test_data
@@ -67,6 +72,7 @@ kNN_Classify(
     )
 
 
+# 运行分类器代码：
 datingClassTest <- function(test_data,train_data,train_target,test_target,k = 5){
     m = nrow(test_data)
     w = ncol(test_data)
